@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Exercise Six";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <div style="color:red" id="errorBox"></div>
+    <div>Instructions: Enter a positive integer, it will then tell you if it's a palidrome.</div>
+    <div><span id="resultSpan">Palidrome: </span></div>
+    <input id="palidromeBox" type="text" /><input type="button" onclick="IsPalidrome()" value="Check" />
+</div>
+
+<script>
+    function IsPalidrome() {
+        $("#errorBox").html("");
+        $.ajax({
+            method: "GET",
+            url: "/Home/SolveExerciseSix?number=" + $("#palidromeBox").val(),
+            error: function (data) { $("#errorBox").html(data.responseText) },
+            success: function (data) { $("#resultSpan").html("Palidrome: " + data) }
+        });
+    }
+</script>

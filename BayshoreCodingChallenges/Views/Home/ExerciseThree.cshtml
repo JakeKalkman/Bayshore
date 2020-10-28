@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Exercise Three";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <div style="color:red" id="errorBox"></div>
+    <div>Instructions: Enter a positive integer, it will then create an outward spiral matrix to the number specified.</div>
+    <span>Matrix:</span>
+    <div id="resultDiv"></div>
+    <input id="matrixBox" type="number" /><input type="button" onclick="GetSpiralMatrix()" value="Check" />
+</div>
+
+<script>
+    function GetSpiralMatrix() {
+        $("#errorBox").html("");
+        $.ajax({
+            method: "GET",
+            url: "/Home/SolveExerciseThree?number=" + $("#matrixBox").val(),
+            error: function (data) { $("#errorBox").html(data.responseText) },
+            success: function (data) { $("#resultDiv").html(data) }
+        });
+    }
+</script>
+
